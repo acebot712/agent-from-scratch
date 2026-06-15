@@ -6,16 +6,45 @@ This repo is the companion codebase for the course. You build a complete,
 readable (~1,200 line) agent framework yourself — tool use, memory, planning,
 multi-agent, and evals — and end up able to recognise every concept in any agent framework on the market.
 
-**Status:** `module-0` seed. See [COURSE_SPEC.md](COURSE_SPEC.md) for the full,
-authoritative module/asset breakdown.
+**Status:** framework complete through `module-8` (tags `module-0` … `module-8`).
+See [COURSE_SPEC.md](COURSE_SPEC.md) for the full, authoritative module/asset
+breakdown.
 
 ## Quickstart
 
 ```bash
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env          # then fill in LLM_API_KEY and LLM_PROVIDER
-python examples/hello_agent.py
+python examples/hello_agent.py        # the 20-line Module 0 build
+python examples/flagship_agent.py     # the capstone, tools+memory+planning+caps
 ```
+
+## Running the tests
+
+```bash
+pytest tests/                 # offline smoke tests, one file per module
+python tests/run_all.py       # same tests, no pytest needed
+
+# optional live end-to-end (hits a real provider):
+RUN_LIVE=1 LLM_PROVIDER=openai LLM_API_KEY=sk-... pytest tests/test_live.py
+```
+
+## The framework (one import)
+
+```python
+from agent import Agent, Tool, ToolRegistry, ToolAgent, SemanticMemory, \
+    run_react, Coordinator, run_eval, enforce_caps, guardrail_check
+```
+
+| module file | what it adds |
+|---|---|
+| `loop.py` | `Agent` + run loop; caps, logging, guardrails (M1, M7) |
+| `tools.py` | tool interface, registry, dispatch, `ToolAgent` (M2) |
+| `memory.py` | working/episodic/semantic memory + cosine retrieval (M3) |
+| `planning.py` | ReAct, reflection/retry, tree-of-thoughts (M4) |
+| `multiagent.py` | coordinator/worker, routing, delegation cap, synthesis (M5) |
+| `evals.py` | metrics, failure taxonomy, regression diff, harness (M6) |
 
 ## Layout
 
