@@ -27,6 +27,15 @@ from .memory import (
     count_tokens,
     top_k_retrieval,
 )
+from .planning import (
+    RetryBudget,
+    extract_answer,
+    parse_react_trace,
+    reflect_and_retry,
+    run_react,
+    select_strategy,
+    tree_of_thoughts,
+)
 
 __all__ = [
     # llm
@@ -56,6 +65,14 @@ __all__ = [
     "top_k_retrieval",
     "context_budget_trim",
     "count_tokens",
+    # planning
+    "run_react",
+    "parse_react_trace",
+    "extract_answer",
+    "reflect_and_retry",
+    "RetryBudget",
+    "tree_of_thoughts",
+    "select_strategy",
 ]
 
-__version__ = "0.3.0"  # module-3
+__version__ = "0.4.0"  # module-4
