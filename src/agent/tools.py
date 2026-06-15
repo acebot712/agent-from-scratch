@@ -239,10 +239,20 @@ class ToolAgent:
     version V2.6 maps onto native function calling.
     """
 
-    def __init__(self, registry: ToolRegistry, *, max_steps: int = 6, model: str | None = None):
+    def __init__(
+        self,
+        registry: ToolRegistry,
+        *,
+        max_steps: int = 6,
+        model: str | None = None,
+        allow: list[str] | None = None,
+        block: list[str] | None = None,
+    ):
         self.registry = registry
         self.max_steps = max_steps
         self.model = model
+        self.allow = allow  # guardrail allowlist (V7.5)
+        self.block = block  # guardrail denylist
         self.history: list[dict[str, Any]] = []
 
     def run(self, task: str) -> str:
@@ -266,6 +276,16 @@ class ToolAgent:
                 # No tool, no final answer — nudge it to decide.
                 self.history.append({"role": "user", "content": "Call a tool or give FINAL ANSWER."})
                 continue
+
+            # Guardrail check before executing (V7.5).
+            if self.allow is not None or self.block is not None:
+                from .loop import guardrail_check
+                ok, reason = guardrail_check(
+                    call["name"], call.get("args"), allow=self.allow, block=self.block
+                )
+                if not ok:
+                    self.history.append({"role": "user", "content": f"Observation: BLOCKED ({reason})"})
+                    continue
 
             result = dispatch(self.registry, call)
             self.history.append({"role": "user", "content": f"Observation: {result.as_observation()}"})

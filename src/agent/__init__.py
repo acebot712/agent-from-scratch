@@ -6,7 +6,16 @@ course has built so far.
 """
 
 from .llm import LLMResponse, ToolCall, complete, embed
-from .loop import DONE_MARKER, Agent, default_stop
+from .loop import (
+    DONE_MARKER,
+    Agent,
+    CapExceeded,
+    default_stop,
+    enforce_caps,
+    estimate_cost,
+    format_log_record,
+    guardrail_check,
+)
 from .tools import (
     Tool,
     ToolAgent,
@@ -117,6 +126,12 @@ __all__ = [
     "replay_runner",
     "exact_match",
     "contains",
+    # production hardening
+    "enforce_caps",
+    "format_log_record",
+    "guardrail_check",
+    "estimate_cost",
+    "CapExceeded",
 ]
 
-__version__ = "0.6.0"  # module-6
+__version__ = "0.7.0"  # module-7
