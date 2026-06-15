@@ -1,5 +1,12 @@
 # Build an AI Agent From Scratch
 
+[![Tests](https://github.com/acebot712/agent-from-scratch/actions/workflows/tests.yml/badge.svg)](https://github.com/acebot712/agent-from-scratch/actions/workflows/tests.yml)
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Modules](https://img.shields.io/badge/modules-9-orange.svg)
+![Dependencies](https://img.shields.io/badge/deps-numpy%20only-lightgrey.svg)
+![No frameworks](https://img.shields.io/badge/LangChain-not%20required-red.svg)
+
 > **Stop using frameworks you don't understand. Build the whole thing yourself in pure Python.**
 
 This is the companion repository for the course. Across 9 modules you build your own
