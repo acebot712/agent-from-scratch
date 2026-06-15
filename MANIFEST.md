@@ -7,8 +7,8 @@ Every course asset and its path. IDs trace back to [COURSE_SPEC.md](COURSE_SPEC.
 | File | Module | Provides |
 |---|---|---|
 | `llm.py` | M1 | `complete()`, `embed()`, `LLMResponse` (provider-agnostic) |
-| `loop.py` | M1 + M7 | `Agent`, `default_stop`, `enforce_caps`, `format_log_record`, `guardrail_check` |
-| `tools.py` | M2 | `Tool`, `ToolRegistry`, `parse_tool_call`, `dispatch`, `ToolAgent` |
+| `loop.py` | M1 + M7 + M8 | `Agent` (one hardened loop, optional tools), `ToolAgent`, `default_stop`, `enforce_caps`, `format_log_record`, `guardrail_check` |
+| `tools.py` | M2 | `Tool`, `ToolRegistry`, `parse_tool_call`, `dispatch` |
 | `memory.py` | M3 | `WorkingMemory`, `EpisodicMemory`, `SemanticMemory`, `cosine_similarity`, `top_k_retrieval`, `context_budget_trim` |
 | `planning.py` | M4 | `run_react`, `parse_react_trace`, `reflect_and_retry`, `RetryBudget`, `tree_of_thoughts`, `select_strategy` |
 | `multiagent.py` | M5 | `Coordinator`, `Worker`, `route_message`, `DelegationCap`, `synthesize_outputs` |

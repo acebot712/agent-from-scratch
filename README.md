@@ -10,9 +10,10 @@
 > **Stop using frameworks you don't understand. Build the whole thing yourself in pure Python.**
 
 This is the companion repository for the course. Across 9 modules you build your own
-~1,200 line agent framework — tool use, memory, planning, multi-agent, evals, and
-production hardening — and end up able to recognise every concept in any agent framework on
-the market (LangChain, CrewAI, AutoGen).
+~1,200-line agent framework — tool use, memory, planning, multi-agent, evals, and
+production hardening — and end up able to **recognise every concept** in any agent
+framework on the market (LangChain, CrewAI, AutoGen): they turn out to be your own
+pieces under different names.
 
 **Dependencies:** `numpy` + a provider-agnostic LLM client (pure standard-library HTTP).
 No LangChain, no vector DB, no heavyweight deps. Target: **Python 3.10**.

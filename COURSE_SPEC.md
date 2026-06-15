@@ -9,7 +9,7 @@
 
 - **Title:** Build an AI Agent From Scratch
 - **Subtitle:** Stop using frameworks you don't understand. Build the whole thing yourself in pure Python.
-- **One-line promise:** By the end you will have built your own ~1,200 line agent framework — tool use, memory, planning, multi-agent, and evals — and you'll recognise every concept in any agent framework on the market.
+- **One-line promise:** By the end you will have built your own ~1,200-line agent framework — tool use, memory, planning, multi-agent, and evals — and you'll be able to recognise every *concept* in any agent framework on the market (they're your own pieces under different names).
 - **Target learner:** Working developers and technical builders who use LLMs but treat agents as magic. People who've wired up LangChain/CrewAI without understanding what's underneath and want first-principles mastery.
 - **Prerequisites:** Solid Python (functions, classes, dicts, basic async is a bonus). Has called an LLM API at least once. **No ML math required** — no calculus, no linear algebra beyond an intuitive dot product, which is taught from scratch.
 - **Final artifact:** A single coherent, readable agent framework (~1,200 lines) the learner builds themselves across the course, living in one public GitHub repo, tagged per module. The capstone uses it to build a flagship end-to-end agent.

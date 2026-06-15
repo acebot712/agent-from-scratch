@@ -6,12 +6,42 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from agent.planning import (  # noqa: E402
     RetryBudget,
+    _coerce_args,
     extract_answer,
     parse_react_trace,
     reflect_and_retry,
     select_strategy,
     tree_of_thoughts,
 )
+from agent.tools import Tool  # noqa: E402
+
+
+def _calc():
+    return Tool("calc", "eval arithmetic", run=lambda expression: expression,
+                parameters={"type": "object", "properties": {"expression": {"type": "string"}}})
+
+
+def _add():
+    return Tool("add", "add a,b", run=lambda a, b: a + b,
+                parameters={"type": "object",
+                            "properties": {"a": {"type": "number"}, "b": {"type": "number"}}})
+
+
+def test_react_args_use_real_param_name_not_x():
+    # regression: a tool whose single arg is NOT named 'x' must still get its value
+    assert _coerce_args("2+2", _calc()) == {"expression": "2+2"}
+
+
+def test_react_args_positional_multi_arg():
+    assert _coerce_args("2, 3", _add()) == {"a": 2, "b": 3}
+
+
+def test_react_args_key_value():
+    assert _coerce_args("a=10, b=5", _add()) == {"a": 10, "b": 5}
+
+
+def test_react_args_json_object():
+    assert _coerce_args('{"a": 1, "b": 2}', _add()) == {"a": 1, "b": 2}
 
 
 def test_parse_react_trace():
