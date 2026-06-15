@@ -36,6 +36,15 @@ from .planning import (
     select_strategy,
     tree_of_thoughts,
 )
+from .multiagent import (
+    Coordinator,
+    DelegationCap,
+    DelegationError,
+    Message,
+    Worker,
+    route_message,
+    synthesize_outputs,
+)
 
 __all__ = [
     # llm
@@ -73,6 +82,14 @@ __all__ = [
     "RetryBudget",
     "tree_of_thoughts",
     "select_strategy",
+    # multi-agent
+    "Coordinator",
+    "Worker",
+    "Message",
+    "route_message",
+    "DelegationCap",
+    "DelegationError",
+    "synthesize_outputs",
 ]
 
-__version__ = "0.4.0"  # module-4
+__version__ = "0.5.0"  # module-5
