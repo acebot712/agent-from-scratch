@@ -1,0 +1,11 @@
+{
+  "run_id": "runA",
+  "note": "baseline eval run over 5 tasks (shipped fixture for Module 6)",
+  "traces": [
+    {"task_id": "t1", "success": true,  "steps": 3, "max_steps": 8, "cost_usd": 0.012, "final_answer": "42",      "tool_errors": 0, "stop_reason": "final_answer"},
+    {"task_id": "t2", "success": true,  "steps": 5, "max_steps": 8, "cost_usd": 0.021, "final_answer": "Paris",   "tool_errors": 0, "stop_reason": "final_answer"},
+    {"task_id": "t3", "success": false, "steps": 8, "max_steps": 8, "cost_usd": 0.040, "final_answer": null,      "tool_errors": 1, "stop_reason": "max_steps"},
+    {"task_id": "t4", "success": false, "steps": 2, "max_steps": 8, "cost_usd": 0.008, "final_answer": "",        "tool_errors": 0, "stop_reason": "error"},
+    {"task_id": "t5", "success": true,  "steps": 4, "max_steps": 8, "cost_usd": 0.018, "final_answer": "blue",    "tool_errors": 0, "stop_reason": "final_answer"}
+  ]
+}

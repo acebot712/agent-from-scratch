@@ -45,6 +45,20 @@ from .multiagent import (
     route_message,
     synthesize_outputs,
 )
+from .evals import (
+    classify_failure,
+    contains,
+    cost_per_task,
+    exact_match,
+    failure_breakdown,
+    load_traces,
+    regression_diff,
+    replay_runner,
+    run_eval,
+    step_efficiency,
+    success_rate,
+    summarize,
+)
 
 __all__ = [
     # llm
@@ -90,6 +104,19 @@ __all__ = [
     "DelegationCap",
     "DelegationError",
     "synthesize_outputs",
+    # evals
+    "run_eval",
+    "summarize",
+    "success_rate",
+    "step_efficiency",
+    "cost_per_task",
+    "classify_failure",
+    "failure_breakdown",
+    "regression_diff",
+    "load_traces",
+    "replay_runner",
+    "exact_match",
+    "contains",
 ]
 
-__version__ = "0.5.0"  # module-5
+__version__ = "0.6.0"  # module-6

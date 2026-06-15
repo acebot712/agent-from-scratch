@@ -1,0 +1,10 @@
+{
+  "task_id": "t3",
+  "success": false,
+  "steps": 8,
+  "max_steps": 8,
+  "cost_usd": 0.04,
+  "final_answer": null,
+  "tool_errors": 1,
+  "stop_reason": "max_steps"
+}

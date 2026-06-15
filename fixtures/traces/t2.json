@@ -1,0 +1,10 @@
+{
+  "task_id": "t2",
+  "success": true,
+  "steps": 5,
+  "max_steps": 8,
+  "cost_usd": 0.021,
+  "final_answer": "Paris",
+  "tool_errors": 0,
+  "stop_reason": "final_answer"
+}
