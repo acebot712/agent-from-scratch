@@ -1,0 +1,7 @@
+# Framework deps are intentionally minimal: numpy + a provider-agnostic LLM
+# client. The client (src/agent/llm.py) uses only the standard library for HTTP,
+# so there is no SDK dependency. No LangChain, no vector DB.
+numpy>=1.24
+
+# Dev / labs only:
+pytest>=7.0
