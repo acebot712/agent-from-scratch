@@ -63,6 +63,16 @@ def test_unified_loop_drives_tools_logs_and_stops_offline():
     assert any(r["action"] == "tool:calc" for r in a.log)
 
 
+def test_minimal_agent_parses_and_dispatches_offline():
+    # the single-file canonical agent: its parsing + dispatch work with no key
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "examples"))
+    import minimal_agent as m
+    call = m.parse_call('TOOL: calculator ARGS: {"expression": "6*7"}')
+    assert call == {"name": "calculator", "args": {"expression": "6*7"}}
+    assert m.run_tool(call) == "42"
+    assert "unknown tool" in m.run_tool({"name": "ghost", "args": {}})
+
+
 def test_unified_loop_guardrail_blocks_tool_offline():
     import agent.loop as loop
     from agent import Tool, ToolRegistry, ToolAgent

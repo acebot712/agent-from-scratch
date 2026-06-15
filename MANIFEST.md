@@ -14,7 +14,7 @@ Every course asset and its path. IDs trace back to [COURSE_SPEC.md](COURSE_SPEC.
 | `multiagent.py` | M5 | `Coordinator`, `Worker`, `route_message`, `DelegationCap`, `synthesize_outputs` |
 | `evals.py` | M6 | `run_eval`, `success_rate`, `step_efficiency`, `cost_per_task`, `classify_failure`, `regression_diff` |
 | `__init__.py` | M8 | consolidated public API |
-| `examples/hello_agent.py` · `examples/flagship_agent.py` | M0 · M8 | runnable demos |
+| `examples/hello_agent.py` · `examples/minimal_agent.py` · `examples/flagship_agent.py` | M0 · core · M8 | runnable demos (20-line toy · ~120-line canonical single file · full capstone) |
 
 ## Lab notebooks (`notebooks/`) — clean + answers each
 

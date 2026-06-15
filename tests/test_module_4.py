@@ -92,6 +92,17 @@ def test_tree_of_thoughts_picks_best():
     assert best == [9]
 
 
+def test_tree_of_thoughts_beam_expansion():
+    # depth-2 beam: seeds 1,2; expand multiplies; best leaf should win
+    best = tree_of_thoughts(
+        propose=lambda: [1, 2],
+        expand=lambda n: [n * 10, n * 3],
+        score=lambda x: x,
+        keep=1, beam_width=2, depth=2,
+    )
+    assert best == [20]  # 2 -> 20 beats 1 -> 10
+
+
 def test_select_strategy_rules():
     assert select_strategy({"needs_tools": True}) == "react"
     assert select_strategy({"verifiable": True, "difficulty": "hard"}) == "reflection"

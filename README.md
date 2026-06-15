@@ -30,6 +30,7 @@ pip install -r requirements.txt
 
 cp .env.example .env                                   # then edit it (see below)
 python examples/hello_agent.py                         # the 20-line Module 0 agent
+python examples/minimal_agent.py                       # the whole idea, ~120 lines, stdlib only
 ```
 
 ### Get an API key & configure `.env`

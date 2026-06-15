@@ -5,10 +5,24 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from agent.loop import (  # noqa: E402
+    estimate_cost,
     enforce_caps,
     format_log_record,
     guardrail_check,
 )
+from agent.llm import LLMResponse  # noqa: E402
+
+
+def test_estimate_cost_uses_model_pricing():
+    # gpt-4o-mini: 0.00015 prompt / 0.00060 completion per 1k
+    resp = LLMResponse(text="", raw={"model": "gpt-4o-mini",
+                                     "usage": {"prompt_tokens": 1000, "completion_tokens": 1000}})
+    assert abs(estimate_cost(resp) - (0.00015 + 0.00060)) < 1e-9
+
+
+def test_estimate_cost_explicit_prices_override():
+    resp = LLMResponse(text="", raw={"usage": {"prompt_tokens": 1000, "completion_tokens": 0}})
+    assert abs(estimate_cost(resp, {"prompt": 0.01, "completion": 0.02}) - 0.01) < 1e-9
 
 
 def test_enforce_caps_step():
