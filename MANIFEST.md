@@ -41,7 +41,7 @@ Every course asset and its path. IDs trace back to [COURSE_SPEC.md](COURSE_SPEC.
 ## Quizzes (`quizzes/`) & cheat sheets (`cheatsheets/`)
 
 `module_0.md` … `module_8.md` in each → **9 quiz banks** + **9 cheat sheets**
-(spaced-review questions in quizzes 3, 5, 7).
+(spaced-review questions in quizzes 2, 3, 5, 7, and cumulative recall in 8).
 
 ## Fixtures (`fixtures/`) — shipped, offline, deterministic
 

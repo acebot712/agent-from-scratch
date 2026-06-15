@@ -75,3 +75,27 @@ D) The model giving a correct final answer
 
 **Answer:** A, B, C
 **Explanation:** All three failure modes should become structured errors the loop can recover from. A correct final answer isn't an error — it's the normal exit.
+
+---
+
+**Q2.SR1 (Spaced review — Module 0).** In one sentence, what *is* an agent?
+
+A) A fine-tuned model specialised for a single task
+B) An LLM in a loop that chooses its own next action
+C) A prompt template with variables filled in
+D) A vector database wired to a chatbot
+
+**Answer:** B
+**Explanation:** Recall from Module 0: the agent *is* the loop. Tools — this module's topic — are just how that loop acts on the world.
+
+---
+
+**Q2.SR2 (Spaced review — Module 1).** What two conditions should end the agent loop?
+
+A) Only when the model emits the completion marker
+B) Only when the step cap is reached
+C) The completion marker appears OR the step cap is reached
+D) When any tool returns an error
+
+**Answer:** C
+**Explanation:** Recall from Module 1: an intentional exit (the `FINAL ANSWER:` marker) plus a safety exit (the step cap). Adding tools doesn't change this terminal logic — a tool error becomes an observation, not a stop.

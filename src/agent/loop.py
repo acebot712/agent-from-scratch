@@ -243,8 +243,9 @@ class Agent:
                 self.stop_reason = reason
                 break
 
-            # done?
-            if DONE_MARKER in last.text or self.stop(last, step, self.max_steps):
+            # done? (default_stop already checks the DONE_MARKER; a custom stop is
+            # fully in control — no hidden marker override)
+            if self.stop(last, step, self.max_steps):
                 self.stop_reason = "stop_condition"
                 break
 
