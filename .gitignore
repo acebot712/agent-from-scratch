@@ -6,3 +6,4 @@ __pycache__/
 venv/
 .DS_Store
 .ipynb_checkpoints/
+notebooks/lab_memory.json
