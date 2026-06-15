@@ -18,6 +18,15 @@ from .tools import (
     parse_tool_call,
     tool,
 )
+from .memory import (
+    EpisodicMemory,
+    SemanticMemory,
+    WorkingMemory,
+    context_budget_trim,
+    cosine_similarity,
+    count_tokens,
+    top_k_retrieval,
+)
 
 __all__ = [
     # llm
@@ -39,6 +48,14 @@ __all__ = [
     "parse_tool_call",
     "UnknownToolError",
     "ToolArgumentError",
+    # memory
+    "WorkingMemory",
+    "EpisodicMemory",
+    "SemanticMemory",
+    "cosine_similarity",
+    "top_k_retrieval",
+    "context_budget_trim",
+    "count_tokens",
 ]
 
-__version__ = "0.2.0"  # module-2
+__version__ = "0.3.0"  # module-3
