@@ -85,6 +85,43 @@ check out. Recommended: take the modules in order.
 | `module-7` | Production realities (caps, logging, guardrails) |
 | `module-8` | Capstone — the consolidated framework |
 
+There are two ways through the course — pick either:
+
+- **Read route (git tags):** `git checkout module-N` to *see* any module's finished
+  state. Best for reading and reference.
+- **Build route (start anywhere):** `python setup_module.py N` to *build* module N
+  yourself, with every earlier module already complete and the answer not in front
+  of you. Best for actually learning it. See below.
+
+---
+
+## Start anywhere and build it yourself: `setup_module.py`
+
+Want to jump straight to Module 5 without building 1–4? One command:
+
+```bash
+python setup_module.py 5        # modules 0..4 complete, module 5 stubbed for you
+cp .env.example .env            # add your key only if a lab needs a live model
+# open the notebook it points you to
+```
+
+It creates a working copy `my_agent/` where **modules 0–4 are complete** and the
+handful of functions you build in Module 5 are **stubbed** (`raise
+NotImplementedError`). The lab and assignment notebooks import from `my_agent/`
+automatically (falling back to `src/` if you haven't run setup). Re-run with
+`--reset` to start the module over (it won't clobber your in-progress work
+otherwise).
+
+No module needs you to have run an earlier module's agent live — Modules 4, 5 and
+6 ship recorded fixtures (`fixtures/reflection`, `fixtures/multiagent`,
+`fixtures/traces`) that `setup_module.py` stages for you.
+
+How it stays maintainable: `setup_module.py` derives every start state from the
+git tags (the single source of truth) and blanks only the symbols listed in its
+`BUILD_TARGETS` manifest — so there is zero duplicated framework code, and a CI
+guard (`tests/test_setup_module.py`) proves every module still materialises and
+imports.
+
 ---
 
 ## How to use each asset
@@ -164,7 +201,8 @@ udemy_exercises/  24 deterministic autograded exercises
 fixtures/         shipped trace + embedding data (offline, deterministic)
 quizzes/          per-module quiz banks
 cheatsheets/      per-module one-page references
-tests/            per-module smoke tests
+tests/            per-module smoke tests (+ the setup_module guard)
+setup_module.py   start-anywhere bootstrap: build any module with the rest done
 COURSE_SPEC.md    the authoritative course spec
 MANIFEST.md       every asset and its path, at a glance
 ```

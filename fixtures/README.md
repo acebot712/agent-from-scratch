@@ -3,6 +3,12 @@
 Shipped, version-controlled test data so labs/assignments run **offline and
 deterministically** (per COURSE_SPEC.md §4). Nothing here calls a live model.
 
+These also power the **start-anywhere** path (`python setup_module.py N`): so no
+module ever needs to run an *earlier* module's agent live, each module that would
+otherwise depend on one ships a recorded fixture instead — `reflection/` for
+Module 4, `multiagent/` for Module 5, `traces/` for Module 6. `setup_module.py`
+stages the ones a module needs into `my_agent/fixtures/`.
+
 ## `traces/` — recorded agent traces (Module 6 evals)
 
 - `runA.json`, `runB.json` — each is `{"run_id", "note", "traces": [...]}`.
@@ -38,3 +44,20 @@ import json, numpy as np
 vecs = np.load("fixtures/embeddings/doc_vectors.npy")
 docs = json.load(open("fixtures/embeddings/docs.json"))
 ```
+
+## `reflection/` — recorded failing output (Module 4 reflection)
+
+- `failing_output.json` — lets the reflection lab/assignment run with **no live
+  earlier agent**. Schema: `task` (str), `success_substring` (str — the
+  `is_good` check), `attempts` (list, ordered bad → bad → good so a retry loop
+  succeeds on the 3rd), `critiques` (list, the feedback between attempts).
+  Drive `reflect_and_retry` with an `attempt()` that pops `attempts` and an
+  `is_good` that checks `success_substring`.
+
+## `multiagent/` — recorded worker outputs (Module 5 coordination)
+
+- `worker_io.json` — lets the multi-agent lab/assignment run with **no live
+  earlier agent**. Schema: `task` (str), `workers` (dict of role → output
+  string for `research`/`write`/`review`), `expected_synthesis_count` (int).
+  Feed `workers.values()` to `synthesize_outputs`, or back fake workers whose
+  `handle()` returns the matching value.

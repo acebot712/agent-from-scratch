@@ -23,8 +23,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # Boilerplate every notebook starts its code with.
 BOOT = (
     "import os, sys\n"
-    "sys.path.insert(0, os.path.abspath(os.path.join('..', 'src')))\n"
-    "# (labs import from src/agent so they track the framework you build)"
+    "# Prefer your working copy (my_agent/, from `python setup_module.py N`);\n"
+    "# fall back to the reference framework in src/.\n"
+    "for _p in ('../my_agent', '../src'):\n"
+    "    if os.path.isdir(os.path.join(_p, 'agent')):\n"
+    "        sys.path.insert(0, os.path.abspath(_p)); break"
 )
 
 

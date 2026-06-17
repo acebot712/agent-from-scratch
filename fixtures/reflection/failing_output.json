@@ -1,0 +1,14 @@
+{
+  "note": "Recorded outputs for the Module 4 reflection lab/assignment, so it runs with NO live earlier agent. attempt() pops the next item; is_good() checks success_substring is present. The list goes bad -> bad -> good, so reflect_and_retry should succeed on the 3rd attempt (2 retries).",
+  "task": "Write a one-sentence summary of why someone might cycle to work, naming a concrete benefit.",
+  "success_substring": "benefit",
+  "attempts": [
+    "Cycling is a thing some people do to get around sometimes.",
+    "Cycling to work is popular in many cities these days.",
+    "Cycling to work has a clear benefit: it builds daily exercise into your commute while cutting travel cost."
+  ],
+  "critiques": [
+    "Too vague — names no concrete benefit; revise to state one.",
+    "Still no concrete benefit named; say what you actually gain."
+  ]
+}

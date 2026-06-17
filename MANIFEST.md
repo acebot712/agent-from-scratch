@@ -47,12 +47,19 @@ Every course asset and its path. IDs trace back to [COURSE_SPEC.md](COURSE_SPEC.
 
 `traces/runA.json`, `traces/runB.json`, `traces/t1..t5.json` (Module 6) ·
 `embeddings/doc_vectors.npy`, `docs.json`, `query_vectors.npy`, `queries.json` (Module 3) ·
+`reflection/failing_output.json` (Module 4) · `multiagent/worker_io.json` (Module 5) ·
 `fixtures/README.md` (schema)
+
+## Start-anywhere bootstrap
+
+`setup_module.py` — `python setup_module.py N` builds a `my_agent/` working copy
+with modules 0..N-1 complete and module N stubbed (derived from the git tags;
+manifest = `BUILD_TARGETS`). Guarded by `tests/test_setup_module.py`.
 
 ## Tests (`tests/`)
 
-`test_module_0.py` … `test_module_8.py` (smoke, offline) · `test_live.py` (opt-in,
-`RUN_LIVE=1`) · `run_all.py` (pytest-free runner)
+`test_module_0.py` … `test_module_8.py` (smoke, offline) · `test_setup_module.py`
+(bootstrap guard) · `test_live.py` (opt-in, `RUN_LIVE=1`) · `run_all.py` (pytest-free runner)
 
 ## Coverage summary
 

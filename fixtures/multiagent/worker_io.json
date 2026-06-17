@@ -1,0 +1,10 @@
+{
+  "note": "Recorded worker outputs for the Module 5 multi-agent lab/assignment, so synthesize_outputs / a coordinator can be exercised with NO live earlier agent. Feed these strings to synthesize_outputs, or hand them to fake workers whose handle() returns the matching value.",
+  "task": "Write a short guide to cycling to work.",
+  "workers": {
+    "research": "Cycling to work cuts commute cost and adds ~30 minutes of daily exercise.",
+    "write": "Cycling to work saves money and builds fitness into your day — start with a safe, short route.",
+    "review": "Clear and useful; add one safety line about lights and a helmet."
+  },
+  "expected_synthesis_count": 3
+}
