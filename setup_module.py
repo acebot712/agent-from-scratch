@@ -63,6 +63,11 @@ BUILD_TARGETS: dict[int, dict[str, list[str]]] = {
 FIXTURES: dict[int, list[str]] = {3: ["embeddings"], 4: ["reflection"],
                                   5: ["multiagent", "embeddings"], 6: ["traces"]}
 
+# The smoke test that exercises each module's build targets (module 1 is covered by
+# test_module_0). Staged into my_agent/tests/ — rewired to import my_agent, so it
+# actually checks the student's source (not the src/ reference).
+TEST_FILE: dict[int, str] = {1: "test_module_0.py", **{n: f"test_module_{n}.py" for n in range(2, 9)}}
+
 # Where to open next, per module.
 NOTEBOOK_HINT = {
     1: "notebooks/lab_v1_3_clean.ipynb + assignments/assignment_1.ipynb",
@@ -167,7 +172,14 @@ def build(n: int, dest: str) -> dict:
         if os.path.isdir(srcdir):
             shutil.copytree(srcdir, os.path.join(dest, "fixtures", sub), dirs_exist_ok=True)
             staged.append(f"fixtures/{sub}")
-    return {"stubbed": targets, "fixtures": staged}
+    # 4. stage a smoke test rewired to import THIS my_agent (not the src/ reference),
+    #    so `pytest` here actually checks what you wrote.
+    tf = TEST_FILE[n]
+    os.makedirs(os.path.join(dest, "tests"), exist_ok=True)
+    test_src = tag_show(tag, f"tests/{tf}").replace('"..", "src"', '".."')
+    with open(os.path.join(dest, "tests", tf), "w", encoding="utf-8") as fh:
+        fh.write(test_src)
+    return {"stubbed": targets, "fixtures": staged, "test": tf}
 
 
 # --- verify + report -----------------------------------------------------------
@@ -228,8 +240,11 @@ def main(argv=None):
     print("\n  Checks:")
     for line in verify(a.dest):
         print("    " + line)
-    print(f"\n  Next: open {NOTEBOOK_HINT[a.module]}")
-    print("  (Notebooks import from my_agent/ automatically.)\n")
+    rel = os.path.relpath(a.dest, os.getcwd())
+    print(f"\n  Next: implement the stubbed functions above in {rel}/agent/, then verify:")
+    print(f"    cd {rel} && python -m pytest tests/{info['test']}")
+    print(f"  Prefer the guided walkthrough of the same module? Open "
+          f"{NOTEBOOK_HINT[a.module]} (those build on the src/ reference).\n")
     return 0
 
 

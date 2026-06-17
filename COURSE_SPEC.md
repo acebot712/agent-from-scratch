@@ -9,10 +9,10 @@
 
 - **Title:** Build an AI Agent From Scratch
 - **Subtitle:** Stop using frameworks you don't understand. Build the whole thing yourself in pure Python.
-- **One-line promise:** By the end you will have built your own ~1,200-line agent framework — tool use, memory, planning, multi-agent, and evals — and you'll be able to recognise every *concept* in any agent framework on the market (they're your own pieces under different names).
+- **One-line promise:** By the end you will have built your own ~1,300-line agent framework — tool use, memory, planning, multi-agent, and evals — and you'll be able to recognise every *concept* in any agent framework on the market (they're your own pieces under different names).
 - **Target learner:** Working developers and technical builders who use LLMs but treat agents as magic. People who've wired up LangChain/CrewAI without understanding what's underneath and want first-principles mastery.
 - **Prerequisites:** Solid Python (functions, classes, dicts, basic async is a bonus). Has called an LLM API at least once. **No ML math required** — no calculus, no linear algebra beyond an intuitive dot product, which is taught from scratch.
-- **Final artifact:** A single coherent, readable agent framework (~1,200 lines) the learner builds themselves across the course, living in one public GitHub repo, tagged per module. The capstone uses it to build a flagship end-to-end agent.
+- **Final artifact:** A single coherent, readable agent framework (~1,300 lines) the learner builds themselves across the course, living in one public GitHub repo, tagged per module. The capstone uses it to build a flagship end-to-end agent.
 - **Format:** Short single-concept videos (3–16 min), guided lab notebooks, autograded Udemy coding exercises for deterministic concepts, scaffolded assignment notebooks with a local autograder for LLM-dependent work, per-module quizzes, and per-module cheat sheets.
 - **Total video runtime:** ~6.5 hours across 9 modules / 49 micro-videos (hands-on work brings total learner time into the 8–12h range).
 - **Course is sequential.** Modules build on each other and the code is monotonic (each module imports prior modules). Udemy lets learners jump around, so every module states its prerequisites and the listing copy will recommend taking it in order. Module 6 is the one module made independently runnable via shipped fixtures.

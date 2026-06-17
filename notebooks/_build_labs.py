@@ -23,11 +23,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # Boilerplate every notebook starts its code with.
 BOOT = (
     "import os, sys\n"
-    "# Prefer your working copy (my_agent/, from `python setup_module.py N`);\n"
-    "# fall back to the reference framework in src/.\n"
-    "for _p in ('../my_agent', '../src'):\n"
-    "    if os.path.isdir(os.path.join(_p, 'agent')):\n"
-    "        sys.path.insert(0, os.path.abspath(_p)); break"
+    "# Import the reference framework (the answer key). You implement pieces in this\n"
+    "# notebook, then check them against this complete version.\n"
+    "sys.path.insert(0, os.path.abspath(os.path.join('..', 'src')))"
 )
 
 
@@ -479,6 +477,10 @@ def build(vid, spec, answers):
             cells.append(make_cell("code", c[1]))
         elif c[0] == "turn":
             cells.append(make_cell("code", c[2] if answers else c[1]))
+    if not answers:  # clean version: tell the student where the worked solution is
+        cells.append(make_cell("markdown",
+            f"---\n**Stuck on a 👉 Your turn?** The fully-worked version of this lab is "
+            f"`lab_{vid}_answers.ipynb` — peek at one cell, then come back."))
     nb = {
         "cells": cells,
         "metadata": {

@@ -78,3 +78,34 @@ def test_reference_fills_every_stub():
             present = _func_qualnames(open(ref).read())
             missing = [s for s in symbols if s not in present]
             assert not missing, f"reference {path} missing {missing} (module {n})"
+
+
+def test_staged_test_imports_my_agent_not_src():
+    # the per-module verification test must check the student's my_agent, not src/
+    for n in MODULES:
+        with tempfile.TemporaryDirectory() as d:
+            dest = os.path.join(d, "my_agent")
+            info = sm.build(n, dest)
+            staged = os.path.join(dest, "tests", info["test"])
+            assert os.path.exists(staged), f"module {n}: staged test missing"
+            text = open(staged).read()
+            assert '"src"' not in text, f"module {n}: staged test still points at src/"
+
+
+def test_stub_fails_then_reference_passes_the_staged_test():
+    # the verification path the docs advertise: stubbed my_agent fails its test,
+    # and filling it from the reference makes it pass. (Representative modules.)
+    import shutil
+    for n in (3, 7):
+        with tempfile.TemporaryDirectory() as d:
+            dest = os.path.join(d, "my_agent")
+            info = sm.build(n, dest)
+            cmd = [sys.executable, "-m", "pytest", f"tests/{info['test']}", "-q"]
+            stubbed = subprocess.run(cmd, cwd=dest, capture_output=True, text=True)
+            assert stubbed.returncode != 0, f"module {n}: stubbed my_agent should fail its test"
+            for f in os.listdir(os.path.join(ROOT, "src", "agent")):
+                if f.endswith(".py"):
+                    shutil.copyfile(os.path.join(ROOT, "src", "agent", f),
+                                    os.path.join(dest, "agent", f))
+            filled = subprocess.run(cmd, cwd=dest, capture_output=True, text=True)
+            assert filled.returncode == 0, f"module {n}: reference should pass the staged test\n{filled.stdout[-800:]}"

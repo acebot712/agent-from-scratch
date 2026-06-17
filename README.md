@@ -10,7 +10,7 @@
 > **Stop using frameworks you don't understand. Build the whole thing yourself in pure Python.**
 
 This is the companion repository for the course. Across 9 modules you build your own
-~1,200-line agent framework — tool use, memory, planning, multi-agent, evals, and
+~1,300-line agent framework — tool use, memory, planning, multi-agent, evals, and
 production hardening — and end up able to **recognise every concept** in any agent
 framework on the market (LangChain, CrewAI, AutoGen): they turn out to be your own
 pieces under different names.
@@ -59,6 +59,24 @@ LLM_PROVIDER=openai          # "openai" (any OpenAI-compatible endpoint) or "ant
 
 ---
 
+## How to take this course
+
+Work module by module, in order. For each module **N** (1–8), do these in sequence:
+
+1. **Watch** the module's videos — short, single-concept.
+2. **Lab** — open `notebooks/lab_v<N>_*_clean.ipynb`, fill the 👉 *Your turn* cells, run it top to bottom. The worked `_answers.ipynb` sits right next to it if you get stuck.
+3. **Exercises** — the autograded drills in `udemy_exercises/ex_v<N>_*/`: edit `starter.py`, then `python -m unittest evaluation`.
+4. **Assignment** — implement `assignments/assignment_<N>.ipynb`, then check it with `python grader/grade.py <N>`.
+5. **Quiz** — `quizzes/module_<N>.md` (answers + explanations included).
+6. **Cheat sheet** — keep `cheatsheets/module_<N>.md` open as you go.
+7. On to module **N+1**.
+
+Throughout, `src/agent/` is your **reference / answer key** — the labs have you build a
+piece, then check it against the complete version. **Module 0** is orientation (what an
+agent is + the 20-line build); **Module 8** is the capstone.
+
+---
+
 ## Jump to any module with git tags
 
 The code is **monotonic**: each module builds on the previous one. Every module's
@@ -85,42 +103,39 @@ check out. Recommended: take the modules in order.
 | `module-7` | Production realities (caps, logging, guardrails) |
 | `module-8` | Capstone — the consolidated framework |
 
-There are two ways through the course — pick either:
-
-- **Read route (git tags):** `git checkout module-N` to *see* any module's finished
-  state. Best for reading and reference.
-- **Build route (start anywhere):** `python setup_module.py N` to *build* module N
-  yourself, with every earlier module already complete and the answer not in front
-  of you. Best for actually learning it. See below.
+The tags are your **reference**: `git checkout module-N` shows any module's finished
+state; `git checkout main` returns to the latest. Most learners don't need this — the
+labs already give you the answer key — but it's there when you want to read a module
+whole. (For the optional "type the framework source yourself" track, see
+`setup_module.py` below.)
 
 ---
 
-## Start anywhere and build it yourself: `setup_module.py`
+## Optional: type the framework yourself with `setup_module.py`
 
-Want to jump straight to Module 5 without building 1–4? One command:
+The guided track above has you build in the notebooks. If you'd rather write the actual
+framework **source** from scratch — and start at any module — use this:
 
 ```bash
-python setup_module.py 5        # modules 0..4 complete, module 5 stubbed for you
-cp .env.example .env            # add your key only if a lab needs a live model
-# open the notebook it points you to
+python setup_module.py 5                       # modules 0..4 complete, module 5 stubbed
+# implement the stubbed functions in my_agent/agent/ ...
+cd my_agent && python -m pytest tests/test_module_5.py   # ...until this goes green
 ```
 
-It creates a working copy `my_agent/` where **modules 0–4 are complete** and the
-handful of functions you build in Module 5 are **stubbed** (`raise
-NotImplementedError`). The lab and assignment notebooks import from `my_agent/`
-automatically (falling back to `src/` if you haven't run setup). Re-run with
-`--reset` to start the module over (it won't clobber your in-progress work
-otherwise).
+It creates a working copy `my_agent/` where **modules 0–4 are complete** and the handful
+of functions you build in Module 5 are **stubbed** (`raise NotImplementedError`). You
+implement the real source, then verify by running the test suite (or the module's coding
+exercises) against `my_agent/`. Re-run with `--reset` to start the module over (it won't
+clobber your in-progress work otherwise).
 
-No module needs you to have run an earlier module's agent live — Modules 4, 5 and
-6 ship recorded fixtures (`fixtures/reflection`, `fixtures/multiagent`,
-`fixtures/traces`) that `setup_module.py` stages for you.
+This is an **advanced, optional track** — most learners use the guided notebooks, which
+build on the complete `src/` reference. No module needs an earlier module's agent run
+live: Modules 4, 5 and 6 ship recorded fixtures (`fixtures/reflection`,
+`fixtures/multiagent`, `fixtures/traces`) that `setup_module.py` stages for you.
 
-How it stays maintainable: `setup_module.py` derives every start state from the
-git tags (the single source of truth) and blanks only the symbols listed in its
-`BUILD_TARGETS` manifest — so there is zero duplicated framework code, and a CI
-guard (`tests/test_setup_module.py`) proves every module still materialises and
-imports.
+How it stays maintainable: `setup_module.py` derives every start state from the git tags
+(the single source of truth) and blanks only the symbols in its `BUILD_TARGETS` manifest
+— zero duplicated framework code, guarded by `tests/test_setup_module.py`.
 
 ---
 

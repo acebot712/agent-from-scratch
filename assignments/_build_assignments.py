@@ -23,11 +23,9 @@ import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 BOOT = (
     "import os, sys\n"
-    "# Prefer your working copy (my_agent/, from `python setup_module.py N`);\n"
-    "# fall back to the reference framework in src/.\n"
-    "for _p in ('../my_agent', '../src'):\n"
-    "    if os.path.isdir(os.path.join(_p, 'agent')):\n"
-    "        sys.path.insert(0, os.path.abspath(_p)); break"
+    "# Import the reference framework you build on. You write your solution in this\n"
+    "# notebook; `python grader/grade.py N` then checks it.\n"
+    "sys.path.insert(0, os.path.abspath(os.path.join('..', 'src')))"
 )
 
 
@@ -393,6 +391,16 @@ def build(n, spec, solution):
             cells.append(make_cell("code", c[1]))
         elif c[0] == "turn":
             cells.append(make_cell("code", c[2] if solution else c[1]))
+    # Every assignment ends with how to check it — no dead end.
+    check = (f"## Check your work\n\n"
+             f"From the repo root, run the local autograder:\n\n"
+             f"```bash\npython grader/grade.py {n}\n```\n\n"
+             f"It prints PASS/FAIL per check and a final score (no API key needed). "
+             f"Stuck? The reference is in `assignment_{n}_solution.ipynb`."
+             if n != 8 else
+             "## Check your work\n\nThe capstone is rubric-based — run "
+             "`python grader/grade.py 8` to print the rubric checklist and self-assess.")
+    cells.append(make_cell("markdown", check))
     nb = {
         "cells": cells,
         "metadata": {
